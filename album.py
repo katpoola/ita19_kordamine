@@ -5,3 +5,6 @@ class Album:
         self.aasta = aasta
         self.laulja = laulja
         self.laulud = []
+
+    def lisa_laul(self, laul):
+        self.laulud.append(laul)
