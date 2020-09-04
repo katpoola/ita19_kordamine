@@ -1,9 +1,10 @@
 class Laul:
-    """klass Laul
+    """
+    Klass Laul
 
     klassi omadused (Atributes)
     pealkiri (str) - laulu pealkiri
-    laulja (str) - laulu laulja (artist)
+    laulja (str) - laulu esitaja (artist)
     """
     def __init__(self, pealkiri, laulja):
         self.pealkiri = pealkiri

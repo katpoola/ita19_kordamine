@@ -2,26 +2,29 @@ from album import Album
 from laul import Laul
 from laulja import Laulja
 
-
+# võtab ja sorteerib kogu info failist
 def faili_info(self):
     with open("albumid.txt", "r", encoding="UTF-8") as fail:
         info = list(zip(*(map(str, rida.split(sep="\t")) for rida in fail)))
     return info[self]
 
-
+# väljastab kõik info failist korrektselt
 def väljasta_sisu():
-    kogu_info = [esitaja, albumid, aastad, laulu_nimi]
+    kogu_info = [esitaja, albumid, aastad, laulude_nimed()]
     for asi in zip(*kogu_info):
         print(*asi, sep="\t")
 
+# korrastab laulude nimed
+def laulude_nimed():
+    for nimi in faili_info(3):
+        laulud.append(nimi.strip())
+    return laulud
 
-# otsing = input("Laulu soov: ")
+
 esitaja = faili_info(0)
 albumid = faili_info(1)
 aastad = faili_info(2)
-laulu_nimi = faili_info(3)
-
-väljasta_sisu()
+laulud = []
 
 # testime laulu objekti loomist
 # laul_1 = Laul("Für Oksana", "Nublu")
