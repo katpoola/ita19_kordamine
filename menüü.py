@@ -1,25 +1,27 @@
 from album import Album
 from laul import Laul
 from laulja import Laulja
-
-
-def faili_info(self):
-    with open("albumid.txt", "r", encoding="UTF-8") as fail:
-        info = list(zip(*(map(str, rida.split(sep="\t")) for rida in fail)))
-    return info[self]
+import csv
 
 
 def väljasta_sisu():
-    kogu_info = [esitaja, albumid, aastad, laulu_nimi]
+    kogu_info = [tabel]
     for asi in zip(*kogu_info):
         print(*asi, sep="\t")
 
 
+tabel = []
+with open("albumid.txt", "r", encoding="UTF-8") as fail:
+    info = csv.reader(fail, delimiter="\t")
+    for rida in info:
+        tabel.append(rida)
+
+eelmine_esitaja = ""
+eelmine_album = ""
+
+
 # otsing = input("Laulu soov: ")
-esitaja = faili_info(0)
-albumid = faili_info(1)
-aastad = faili_info(2)
-laulu_nimi = faili_info(3)
+
 
 väljasta_sisu()
 
