@@ -1,5 +1,16 @@
 class Album:
+    """
+    Klass Album
 
+    klassi omadused (Atributes)
+    pealkiri (str) - laulu nimi
+    aasta (str) - albumi loomise aasta
+    laulja (str) - esitaja
+    seob andmed omavahel
+
+    lisa_laul() - lisab laulu albumisse
+    laul (str) - laulu nimi
+    """
     def __init__(self, pealkiri, aasta, laulja):
         self.pealkiri = pealkiri
         self.aasta = aasta
