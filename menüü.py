@@ -48,29 +48,38 @@ if valik == "1":
         album.näita_laulud()
         print("---------------------------------------")
 elif valik == "2":
-    otsitav = input("Sisestage otsitav album või aasta: ")
+    otsing = input("Sisestage otsitav album või aasta: ")
+    olemas = False
     for album in albumid:
-        if otsitav.lower() in album.pealkiri.lower() or otsitav == album.aasta:
+        if otsing.lower() in album.pealkiri.lower() or otsing == album.aasta:
             album.näita_laulja_ja_nimi()
             album.näita_laulud()
-    if otsitav.lower() not in album.pealkiri.lower() or otsitav == album.aasta:
+            olemas = True
+    while olemas == False:
         print("Puudub.")
+        break
 elif valik == "3":
-    otsitav = input("Sisestage otsitav laul: ")
+    otsing = input("Sisestage otsitav laul: ")
+    olemas = False
     for album in albumid:
         for laul in album.laulud:
-            if otsitav.lower() in laul.pealkiri.lower():
+            if otsing.lower() in laul.pealkiri.lower():
                 album.näita_laulja_ja_nimi()
                 laul.näita_pealkiri()
-    if otsitav.lower() not in laul.pealkiri.lower():
+                olemas = True
+    while olemas == False:
         print("Puudub.")
+        break
 elif valik == "4":
     otsitav = input("Sisestage otsitav laulja: ")
+    olemas = False
     for laulja in lauljad:
         if otsitav.lower() in laulja.nimi.lower():
             for album in laulja.albumid:
                 album.näita_laulja_ja_nimi()
-    if otsitav.lower() not in laulja.nimi.lower():
+            olemas = True
+    while olemas == False:
         print("Puudub.")
+        break
 else:
     print("Midagi läks valesti, proovige uuesti.\n --------------------------------- ")
