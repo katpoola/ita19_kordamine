@@ -16,47 +16,61 @@ with open("albumid.txt", "r", encoding="UTF-8") as fail:
     for rida in info:
         tabel.append(rida)
 
-eelmine_esitaja = ""
-eelmine_album = ""
+albumid = []
+lauljad = []
+laulud = []
+lauljad_kontroll = []
+albumid_kontroll = []
 
+for rida in tabel:
+    laul = Laul(rida[3], rida[0])
+    laulud.append(laul)
 
-# otsing = input("Laulu soov: ")
+    if rida[0] not in lauljad_kontroll:
+        laulja = Laulja(rida[0])
+        lauljad.append(laulja)
+        lauljad_kontroll.append(laulja.nimi)
 
+    if rida[1] not in albumid_kontroll:
+        album = Album(rida[1], rida[2], rida[0])
+        laulja.lisa_album(album)
+        albumid.append(album)
+        albumid_kontroll.append(rida[1])
 
-väljasta_sisu()
+    album.lisa_laul(laul)
 
-# testime laulu objekti loomist
-# laul_1 = Laul("Für Oksana", "Nublu")
-# print(laul_1.laulja, laul_1.pealkiri)
-# laul_2 = Laul("12", "Nublu")
-# print(laul_2.laulja, laul_2.pealkiri)
-# laul_3 = Laul("Crossandid", "Nublu")
-# print(laul_1.laulja, laul_1.pealkiri)
-# laul_4 = Laul("Öölaps", "Nublu")
-# print(laul_2.laulja, laul_2.pealkiri)
+valik = input("1 - Näita tervet muusikakogu ekraanile\n2 - Otsing albumi pealkirja või aasta järgi\n3 - Otsing laulu nime järgi\n4 - Otsing laulja järgi\nValik (1, 2, 3, 4): ")
 
-# testime albumi loomist
-# album_1 = Album("Uus album 1", 2019, "Nublu")
-# lisame laulud albumisse
-# album_1.lisa_laul(laul_1)
-# album_1.lisa_laul(laul_2)
-# testime albumi loomist
-# album_2 = Album("Uus album 2", 2019, "Nublu")
-# lisame laulud albumisse
-# album_2.lisa_laul(laul_3)
-# album_2.lisa_laul(laul_4)
-
-# vaatame loodud albumi sisu
-# print(album_2.pealkiri)
-# for laul in album_2.laulud:
-#    print(laul.laulja, laul.pealkiri)
-
-# testime Laulja loomist
-# laulja = Laulja("Nublu")
-# laulja.lisa_album(album_1)
-# laulja.lisa_album(album_2)
-# testime albumite sisu
-# for album in laulja.albumid:
-#    print(album.pealkiri)
-#    for laul in album.laulud:
-#        print(laul.laulja, laul.pealkiri)
+if valik == "1":
+    print("Albumid: ")
+    for album in albumid:
+        album.näita_laulja_ja_nimi()
+        album.näita_laulud()
+        print("---------------------------------------")
+elif valik == "2":
+    otsitav = input("Sisestage otsitav album või aasta: ")
+    for album in albumid:
+        if otsitav.lower() in album.pealkiri.lower() or otsitav == album.aasta:
+            album.näita_laulja_ja_nimi()
+            album.näita_laulud()
+    if otsitav.lower() not in album.pealkiri.lower() or otsitav == album.aasta:
+        print("Puudub.")
+elif valik == "3":
+    otsitav = input("Sisestage otsitav laul: ")
+    for album in albumid:
+        for laul in album.laulud:
+            if otsitav.lower() in laul.pealkiri.lower():
+                album.näita_laulja_ja_nimi()
+                laul.näita_pealkiri()
+    if otsitav.lower() not in laul.pealkiri.lower():
+        print("Puudub.")
+elif valik == "4":
+    otsitav = input("Sisestage otsitav laulja: ")
+    for laulja in lauljad:
+        if otsitav.lower() in laulja.nimi.lower():
+            for album in laulja.albumid:
+                album.näita_laulja_ja_nimi()
+    if otsitav.lower() not in laulja.nimi.lower():
+        print("Puudub.")
+else:
+    print("Midagi läks valesti, proovige uuesti.\n --------------------------------- ")

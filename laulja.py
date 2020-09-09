@@ -15,3 +15,10 @@ class Laulja:
 
     def lisa_album(self, album):
         self.albumid.append(album)
+
+    def näita_nimi(self):
+        print(self.nimi)
+
+    def näita_albumeid(self):
+        for album in self.albumid:
+            album.näita_nimi()
